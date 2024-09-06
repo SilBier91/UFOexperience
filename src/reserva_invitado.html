@@ -1,0 +1,114 @@
+<?php
+    session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Reservas</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css" /> 
+    <script src="../js/funcionesIndex.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-image: url('../img/niebla.jpg');
+            background-size:cover;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+   
+    <div class="max-w-4xl mx-auto my-12">
+        <div class="text-center">
+            <a class="text-black text-3xl font-bold" href="#">
+                <pre>𓆩ɄӺꝊ ɆӾꝐɆꞦĪɆꞤȻɆ𓆪</pre>
+                <p class="text-white text-sm px-4 py-2"><pre>ᴱˣᵖᵉʳⁱᵉⁿᶜⁱᵃˢ ᵖᵃʳᵃⁿᵒʳᵐᵃˡᵉˢ</pre></p>
+            </a>
+        
+            <div class="bg-white p-8 shadow-md">
+                <p class="text-left font-bold mb-4">Haz tu reserva:</p>
+                <form id="reservationForm" action="../php/reserva.php" method="post">
+                    <!-- Nombre y Correo electrónico -->
+                    <div class="mb-4 flex justify-between w-full">
+                        <div class="w-1/2">
+                            <label for="name" class="block text-sm font-bold mb-2">Nombre:</label>
+                            <input id="name" name="name" type="text" class="w-full p-2 border border-gray-300 rounded" placeholder="Nombre">
+                        </div>
+                        <div class="w-1/2">
+                            <label for="email" class="block text-sm font-bold mb-2">Correo electrónico:</label>
+                            <input id="email" name="email" type="email" class="w-full p-2 border border-gray-300 rounded" placeholder="Correo electrónico">
+                        </div>
+                    </div>
+                    <!-- Calendario, Experiencia y Número de personas -->
+                    <div class="mb-4 flex justify-between w-full">
+                        <div class="w-1/3">
+                            <label for="datepicker" class="block text-sm font-semibold mb-2">Elige fecha y hora:</label>
+                            <input id="datepicker" name="datepicker" class="w-full border border-gray-300 rounded-md py-2" placeholder="Selecciona una fecha y hora" />
+                        </div>
+                        <div class="w-1/3">
+                            <label for="experience" class="block text-sm font-bold mb-2">Experiencia:</label>
+                            <select id="experience" name="experience" class="w-full p-2 border border-gray-300 rounded">
+                                <option value="Montserrat">Montaña de Montserrat</option>
+                                <option value="Sanatorio">Sanatorio del Santo Angel</option>
+                                <option value="7Chimeneas">La casa de las 7 chimeneas</option>
+                            </select>
+                        </div>
+                        <div class="w-1/3">
+                            <label for="personas" class="block text-sm font-bold mb-2">Nº de personas (máx 4):</label>
+                            <select id="personas" name="personas" class="w-full p-2 border border-gray-300 rounded">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Botón de reserva -->
+                    <div class="mb-4 w-full">
+                        <button id="reservarBtn" class="w-full div-nosotros text-white font-semibold py-2 rounded-md hover:bg-gray-500 transition-colors">Pasar al pago</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center my-8">
+        <a href="index.html" class="div-nosotros text-white px-8 py-2 rounded uppercase font-bold">Página principal</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+         flatpickr('#datepicker', {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i:S",
+      minDate: "today",
+      time_24hr: true,
+      disable: [
+          function(date) {
+              // Deshabilitar los días de la semana de lunes a jueves
+              return (date.getMonth()===7 ||date.getMonth()===8||date.getMonth()===9||date.getMonth()===10||date.getMonth()===11 || 
+              date.getDay() === 1 || date.getDay() === 2 || date.getDay() === 3 || date.getDay() === 4);
+          }
+      ],
+      hourIncrement: 3, // Permitir seleccionar solo horas cada 3 horas
+      // Rangos de horas permitidas
+      minTime: "20:00",
+      maxTime: "00:00",
+  });
+  document.getElementById('reservationForm').addEventListener('submit', function(event) {
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(email)) {
+                alert('Por favor, introduce un correo electrónico válido.');
+                event.preventDefault();
+            }
+    });
+    </script>
+    
+</body>
+</html>

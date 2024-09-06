@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css" /> 
+    <style>
+        body{
+            font-family: 'Open Sans', sans-serif;
+            background-image: url('../img/niebla.jpg');
+            background-size:cover;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-2xl mx-auto my-12">
+        <div class="text-center">
+            <h3 class="text-2xl font-bold mb-4">Si tienes alguna duda, escríbenos y nos pondremos en contacto</h3>
+            <div class="bg-white p-8 shadow-md">
+                <form id="formContact"action="../php/procesar_formulario.php" method="post">
+                    <div class="mb-4">
+                        <label for="nombre" class="block text-sm font-bold mb-2">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" class="w-full p-2 border border-gray-300 rounded" required>
+                      </div>
+                      <div class="mb-4">
+                        <label for="email" class="block text-sm font-bold mb-2">Email:</label>
+                        <input type="email" id="email" name="email" class="w-full ancho-email p-2 border border-gray-300 rounded" required>
+                      </div>
+                      <div class="mb-4">
+                        <label for="telefono" class="block text-sm font-bold mb-2">Teléfono (opcional):</label>
+                        <input type="tel" id="telefono" name="telefono" class="w-full p-2 border border-gray-300 rounded">
+                      </div>
+                      <div class="mb-4">
+                        <label for="mensaje" class="block text-sm font-bold mb-2">Escribe aquí lo que quieras:</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" class="w-full p-2 border border-gray-300 rounded" required></textarea>
+                      </div>
+                      <div>
+                        <button type="submit" class="w-full bg-black text-white font-semibold py-2 rounded-md hover:bg-gray-500 transition-colors">Enviar mensaje</button>
+                      </div>
+                      <p class="text-black from-neutral-100 py-2 text-right mt-2">
+                        <a href="index.html" class="text-black hover:text-purple-950">Regresa a la página principal</a>
+                      </p>
+                      
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('formContact').addEventListener('submit', function(event) {
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(email)) {
+                alert('Por favor, introduce un correo electrónico válido.');
+                event.preventDefault();
+            }
+    });
+    </script>
+</body>
+</html>

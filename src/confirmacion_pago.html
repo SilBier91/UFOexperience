@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Confirmado</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css" /> 
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-image: url('../img/galaxia.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow-y: hidden;
+            
+            .confirmation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 3px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+            .confirmation img {
+            width: 100px;
+            height: auto;
+            margin-left:100px;
+            }
+
+        }
+       
+    </style>
+    <script>
+        window.onload = function() {
+            var ventana = document.createElement("div");
+            ventana.className = "confirmation";
+            ventana.innerHTML = `
+                <h2 class="text-xl font-bold mb-5">¡Pago realizado con éxito!</h2>
+                <p class="mb-3">Gracias por reservar con UFO Experience.</p>
+                <img src="../img/alien_2.png" alt="Alien Logo">
+            `;
+            document.body.appendChild(ventana);
+
+            setTimeout(function() {
+                document.body.removeChild(ventana);
+                window.location.href = "index.html";
+            }, 5000);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
